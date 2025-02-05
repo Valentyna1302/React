@@ -1,12 +1,13 @@
 import { Field, Form, Formik } from 'formik';
 
-const SearchBar = () => {
+const SearchBar = ({ handleChangeQuery, query }) => {
   const onSubmit = values => {
     console.log(values);
+    handleChangeQuery(values.query);
   };
 
   const initialValues = {
-    query: '',
+    query,
   };
   return (
     <div>
