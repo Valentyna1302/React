@@ -6,8 +6,8 @@ const UserDetails = () => {
   const { userId } = useParams();
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+
   const location = useLocation();
-  console.log(location);
   const goBackUrl = useRef(location?.state ?? '/users');
 
   useEffect(() => {
@@ -25,6 +25,7 @@ const UserDetails = () => {
   return (
     <div>
       <Link to={goBackUrl.current}>Go back</Link>
+
       <img src={user.image} />
       <h2>
         {user.firstName} {user.lastName}
