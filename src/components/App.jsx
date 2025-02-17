@@ -5,7 +5,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 const App = () => {
   useEffect(() => {
-    const abortController = () => new AbortController();
+    const abortController = new AbortController();
 
     axios
       .get('https://dummyjson.com/users', { signal: abortController.signal })
