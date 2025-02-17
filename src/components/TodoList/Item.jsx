@@ -10,8 +10,7 @@ const Item = ({ isCompleted, todo, id, isFavorite }) => {
   const [value, setValue] = useState(todo);
   return (
     <li className={s.item}>
-      <input type='checkbox' checked={isCompleted} />
-      <p>
+      <div>
         {editMode ? (
           <div>
             <input
@@ -29,7 +28,7 @@ const Item = ({ isCompleted, todo, id, isFavorite }) => {
             {isFavorite && <FaStar color='gold' />} {todo}{' '}
           </p>
         )}
-      </p>
+      </div>
       <div>
         <button>{isFavorite ? 'Dislike' : 'Like'}</button>
         <button onClick={() => setEditMode(true)}>Edit</button>
