@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux';
 import s from './TodoList.module.css';
 import { FaStar } from 'react-icons/fa';
-import { deleteTodo, editTodo } from '../../redux/todoSlice';
 import { useState } from 'react';
+import { deleteTodo, editTodo } from '../../redux/todosOps';
 
-const Item = ({ isCompleted, todo, id, isFavorite }) => {
+const Item = ({ completed, todo, id, isFavorite }) => {
   const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
   const [value, setValue] = useState(todo);
@@ -18,7 +18,7 @@ const Item = ({ isCompleted, todo, id, isFavorite }) => {
               value={value}
               onChange={e => setValue(e.target.value)}
               onBlur={() => {
-                dispatch(editTodo({ id, todo: value }));
+                dispatch(editTodo({ id, completed, todo: value }));
                 setEditMode(false);
               }}
             />
