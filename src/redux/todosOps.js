@@ -6,9 +6,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'https://67b37562392f4aa94fa74786.mockapi.io';
 
-export const fetchData = createAsyncThunk('todos/fetchData', async (_, thunkAPI) => {
+export const fetchData = createAsyncThunk('todos/fetchData', async ({ signal }, thunkAPI) => {
   try {
-    const { data } = await axios.get(`/tasks`);
+    const { data } = await axios.get(`/tasks`, { signal });
     return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
