@@ -1,5 +1,4 @@
 import { useDispatch } from 'react-redux';
-import { AddForm } from './AddForm';
 import { List } from './List';
 import { SearchBar } from './SearchBar';
 import s from './TodoList.module.css';
@@ -7,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { addTodo, fetchData } from '../../redux/todosOps';
 import TodoForm from '../TodoForm';
 import Modal from '../Modal/Modal';
+import Filter from './Filter';
 export const TodoList = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
@@ -28,6 +28,8 @@ export const TodoList = () => {
       {/* <AddForm /> */}
       <button onClick={() => setIsOpen(true)}>Add</button>
       <SearchBar />
+
+      <Filter />
       <List />
       {isOpen && (
         <Modal>
