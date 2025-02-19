@@ -1,12 +1,12 @@
 import { useDispatch } from 'react-redux';
 import s from './TodoList.module.css';
 import { FaStar } from 'react-icons/fa';
-import { deleteTodo } from '../../redux/todosOps';
+import { deleteTodo, editTodo } from '../../redux/todosOps';
 
 const Item = ({ completed, edit, todo, id, isFavorite }) => {
   const dispatch = useDispatch();
   const handleChange = e => {
-    console.log(e);
+    dispatch(editTodo({ completed: !completed, todo, id }));
   };
   return (
     <li className={s.item}>
