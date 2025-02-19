@@ -10,6 +10,7 @@ export const AddForm = () => {
   const onSubmit = (values, options) => {
     const newObj = {
       todo: values.todo,
+      completed: false,
     };
     dispatch(addTodo(newObj));
     options.resetForm();
