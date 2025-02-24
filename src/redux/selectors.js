@@ -47,3 +47,8 @@ export const selectUncompletedTodos = state => {
   return todos.reduce((total, curr) => (curr.completed ? total : total + 1), 0);
   // return todos.filter(item => !item.completed).length;
 };
+
+//auth
+
+export const selectUser = state => state.auth.user;
+export const selectIsLoggedIn = state => state.auth.isLoggedIn;
