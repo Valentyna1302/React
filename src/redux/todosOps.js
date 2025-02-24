@@ -1,4 +1,4 @@
-//https://67b37562392f4aa94fa74786.mockapi.io/tasks
+//https://task-manager-api.goit.global
 
 import axios from 'axios';
 
