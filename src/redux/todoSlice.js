@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { addTodo, deleteTodo, editTodo, fetchData } from './todosOps';
+import { logoutThunk } from './authOperations';
 
 const initialState = {
   items: [],
@@ -19,6 +20,7 @@ const slice = createSlice({
       .addCase(fetchData.pending, (state, action) => {
         state.isLoading = true;
       })
+      .addCase(logoutThunk.fulfilled, () => initialState)
       .addCase(fetchData.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = action.payload;
