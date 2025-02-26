@@ -11,7 +11,8 @@ const persistConfig = {
   storage,
   whitelist: ['token'],
 };
-
+console.log(import.meta.env);
+const stage = import.meta.env.MODE;
 const persistedReducer = persistReducer(persistConfig, authReducer);
 export const store = configureStore({
   reducer: {
@@ -25,7 +26,7 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-  devTools: false,
+  devTools: stage === 'development' ? true : false,
 });
 
 export let persistor = persistStore(store);
