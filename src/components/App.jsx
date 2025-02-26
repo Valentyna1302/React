@@ -1,39 +1,48 @@
 import { Route, Routes } from 'react-router-dom';
-import Header from './Header/Header';
-import Home from '../pages/Home';
-import About from '../pages/About';
-import NotFound from '../pages/NotFound';
-import Aim from './NestedRoutes/Aim';
-import Team from './NestedRoutes/Team';
-import Company from './NestedRoutes/Company';
-import Users from '../pages/Users';
-import UserDetails from '../pages/UserDetails';
-import UserPosts from './NestedRoutes/UserPosts';
-
+import Home from '../pages/Home/Home';
+import NotFound from '../pages/NotFound/NotFound';
+import Login from '../pages/Login/Login';
+import Register from '../pages/Register/Register';
+import Todos from '../pages/Todos/Todos';
+import Layout from './Layout';
+import { useDispatch, useSelector } from 'react-redux';
+import { refreshUser } from '../redux/authOperations';
+import { useEffect } from 'react';
+import { selectIsRefreshing } from '../redux/selectors';
+import PrivateRoute from '../config/routes/PrivateRoute';
+import PublicRoute from '../config/routes/PublicRoute';
+import RestrictedRoute from '../config/routes/RestictedRoute';
 const App = () => {
-  return (
-    <main>
-      <Header />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        {/* localhost/about/aim */}
-        {/* localhost/about/company */}
-        {/* localhost/about/team */}
-        <Route path='/about' element={<About />}>
-          <Route path='aim' element={<Aim />} />
-          <Route path='company' element={<Company />} />
-          <Route path='team' element={<Team />} />
-        </Route>
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
 
-        <Route path='/users' element={<Users />} />
-
-        <Route path='/users/:userId' element={<UserDetails />}>
-          <Route path='info' element={<h2>Info about user</h2>} />
-          <Route path='posts' element={<UserPosts />} />
-        </Route>
-        <Route path='*' element={<NotFound />} />
-      </Routes>
-    </main>
+  return isRefreshing ? null : (
+    <Routes>
+      <Route path='/' element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route
+          path='todos'
+          element={
+            <PrivateRoute redirectTo='/'>
+              <Todos />
+            </PrivateRoute>
+          }
+        />
+      </Route>
+      <Route path='/login' element={<RestrictedRoute component={<Login />} redirectTo='/todos' />} />
+      <Route path='*' element={<NotFound />} />
+      <Route
+        path='/register'
+        element={
+          <PublicRoute redirectTo='/'>
+            <Register />
+          </PublicRoute>
+        }
+      />
+    </Routes>
   );
 };
 export default App;
