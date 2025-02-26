@@ -5,7 +5,7 @@ const TodoForm = ({ initialValues, handleSubmit, text = 'add' }) => {
     <div>
       <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>
         <Form>
-          <Field name='todo' placeholder='placeholder' />
+          <Field name='text' placeholder='placeholder' />
           <button type='submit'>{text}</button>
         </Form>
       </Formik>

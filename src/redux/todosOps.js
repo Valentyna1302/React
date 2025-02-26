@@ -32,7 +32,7 @@ export const addTodo = createAsyncThunk('todos/addTodo', async (body, thunkAPI) 
 
 export const editTodo = createAsyncThunk('todos/editTodo', async (body, thunkAPI) => {
   try {
-    const { data } = await api.put(`/tasks/${body.id}`, body);
+    const { data } = await api.patch(`/tasks/${body.id}`, body);
     return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
