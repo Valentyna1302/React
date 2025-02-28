@@ -25,7 +25,8 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-  devTools: stage === 'development',
+
+  devTools: stage === 'development' ? true : false,
 });
 
 export let persistor = persistStore(store);
